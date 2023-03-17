@@ -1,0 +1,233 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+body {
+  background: #101318;
+}
+
+header {
+  max-width: 900px;
+  margin: 20px auto;
+}
+header .tag-input {
+  display: flex;
+  position: relative;
+}
+header .tag-input input {
+  background: #282D39;
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-radius: 3px;
+  outline: none;
+  padding-left: 10px;
+  font-family: Manrope;
+  color: #fff;
+}
+header .tag-input input::-moz-placeholder {
+  padding-left: 30px;
+  color: #fff;
+  opacity: 0.7;
+  -moz-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+header .tag-input input::placeholder {
+  padding-left: 30px;
+  color: #fff;
+  opacity: 0.7;
+  transition: 0.3s ease-in-out;
+}
+header .tag-input > input:focus::-moz-placeholder {
+  padding-left: 0px;
+}
+header .tag-input > input:focus::placeholder {
+  padding-left: 0px;
+}
+header .tag-input input:focus ~ .icon {
+  opacity: 0;
+}
+header .tag-input input:not(:-moz-placeholder-shown) ~ .icon {
+  opacity: 0;
+}
+header .tag-input input:not(:placeholder-shown) ~ .icon {
+  opacity: 0;
+}
+header .tag-input .btn-submit {
+  cursor: pointer;
+  height: 40px;
+  min-width: 100px;
+  background: linear-gradient(99.09deg, #51B2FF 0%, #2672DA 100%);
+  box-shadow: -4px 0px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 3px;
+  display: grid;
+  place-items: center;
+}
+header .tag-input .btn-submit svg {
+  fill: #fff;
+  width: 16px;
+}
+header .tag-input .icon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 40px;
+  display: grid;
+  place-items: center;
+  transition: 0.3s ease-in-out;
+}
+header .tag-input .icon svg {
+  width: 16px;
+  fill: #fff;
+  opacity: 0.7;
+}
+
+main {
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: Manrope;
+}
+main .title {
+  color: #fff;
+  font-size: 15px;
+  opacity: 0.5;
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+}
+main .title .icon {
+  width: 15px;
+  margin-right: 10px;
+  display: grid;
+  place-items: center;
+}
+main .title .icon svg {
+  fill: #fff;
+}
+main .block-tag ul {
+  display: flex;
+  min-height: 40px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+main .block-tag ul li.finded {
+  background: #2A77DD;
+}
+main .block-tag ul li.locked .icon-lock {
+  display: block;
+}
+main .block-tag ul li.tag-placeholder {
+  background: #282D39;
+  border: none;
+}
+main .block-tag ul li.ui-sortable-helper {
+  background: #94B3DC;
+  border: none;
+  transform: rotate(-7deg);
+}
+main .block-tag ul li.ui-sortable-helper .icon-move {
+  display: block;
+}
+main .block-tag ul li {
+  display: grid;
+  place-items: center;
+  position: relative;
+  border-radius: 3px;
+  color: #fff;
+  padding: 0 20px;
+  height: 40px;
+  font-size: 13px;
+  cursor: pointer;
+}
+main .block-tag ul li .icon-lock {
+  display: none;
+  position: absolute;
+  top: -10px;
+  left: -4px;
+}
+main .block-tag ul li .icon-lock svg {
+  width: 10px;
+  fill: #fff;
+}
+main .block-tag ul li .icon-move {
+  display: none;
+  position: absolute;
+  right: -5px;
+  top: -10px;
+}
+main .block-tag ul li .icon-move svg {
+  width: 10px;
+  fill: #fff;
+}
+main .block-tag ul.search-tag li {
+  opacity: 0.5;
+}
+main .block-tag ul li.finded {
+  opacity: 1;
+}
+main .block-tag .main-tag li {
+  border: 1px solid #2A77DD;
+}
+main .block-tag .main-tag li:hover {
+  background: #2A77DD;
+}
+main .block-tag .compl-tag li {
+  border: 1px solid #94B3DC;
+}
+main .block-tag .compl-tag li:hover {
+  background: #94B3DC;
+}
+
+footer {
+  max-width: 900px;
+  margin: 0 auto;
+  font-family: Manrope;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+footer .info-words {
+  display: flex;
+  align-items: center;
+}
+footer .info-words .count {
+  display: flex;
+  color: #fff;
+}
+footer .info-words .text-content {
+  font-size: 14px;
+  color: #fff;
+  opacity: 0.5;
+  margin-left: 10px;
+  font-size: 14px;
+}
+footer .btn-submit {
+  display: grid;
+  place-items: center;
+  height: 40px;
+  width: 100px;
+  cursor: pointer;
+  background: linear-gradient(99.09deg, #51B2FF 0%, #2672DA 100%);
+  border-radius: 3px;
+}
+footer .btn-submit svg {
+  fill: #fff;
+  width: 16px;
+}
+
+@media screen and (max-width: 900px) {
+  header {
+    margin: 20px;
+  }
+  main {
+    margin: 20px;
+  }
+  footer {
+    margin: 20px;
+  }
+}

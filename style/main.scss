@@ -125,7 +125,7 @@ main {
 
             li.locked {
                 .icon-lock {
-                    display: block;
+                    display: grid;
                 }
             }
 
@@ -158,11 +158,19 @@ main {
                 .icon-lock {
                     display: none;
                     position: absolute;
-                    top: -10px;
-                    left: -4px;
+                    top: -15px;
+                    left: -14px;
+                    width: 25px;
+                    height: 25px;
+                    place-items: center;
+                    border-radius: 50%;
+
+                    &:hover{
+                        background: linear-gradient(99.09deg, #51B2FF 0%, #2672DA 100%);
+                    }
 
                     svg {
-                        width: 10px;
+                        width: 8px;
                         fill: #fff;
                     }
                 }
@@ -176,6 +184,12 @@ main {
                     svg {
                         width: 10px;
                         fill: #fff;
+                    }
+                }
+
+                &:hover{
+                    .icon-lock{
+                        display: grid;
                     }
                 }
             }
@@ -270,3 +284,5 @@ footer {
         margin: 20px;
     }
 }
+
+@import './frame_dialog';

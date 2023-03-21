@@ -1,4 +1,4 @@
-var version = '2';
+var version = '3';
 var cacheName = 'pwa-keys-v' + version;
 var appShellFilesToCache = [
     //Pages
@@ -8,6 +8,8 @@ var appShellFilesToCache = [
     //Javascript
     '/javascript/server.js',
     '/javascript/main.js',
+    //Library
+    '/javascript/library/updatedialog.js'
 ];
 
 var dataCacheName = 'pwa-tunime-data-v' + version;

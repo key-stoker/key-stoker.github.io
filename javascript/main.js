@@ -258,10 +258,12 @@ function OnClickLoked() {
     });
 }
 
-function OnClickRemove(){
-    $('ul').on('click', 'li > .icon-remove', (e)=>{
+function OnClickRemove() {
+    $('ul').on('click', 'li > .icon-remove', (e) => {
         let element = $(e.currentTarget).closest('li');
         element.remove();
+        //Обновляем количество тегов
+        UpdateCount();
     });
 }
 

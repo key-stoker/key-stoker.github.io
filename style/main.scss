@@ -145,8 +145,9 @@ main {
             }
 
             li {
-                display: grid;
-                place-items: center;
+                display: flex;
+                justify-content: center;
+                align-items: center;
                 position: relative;
                 border-radius: 3px;
                 color: #fff;
@@ -183,6 +184,26 @@ main {
 
                     svg {
                         width: 10px;
+                        fill: #fff;
+                    }
+                }
+
+                &:not(.locked):not(.ui-sortable-helper):hover > .icon-remove{
+                    max-width: 20px;
+                    margin-left: 10px;
+                }
+
+                .icon-remove{
+                    width: 20px;
+                    max-width: 0px;
+                    overflow: hidden;
+                    height: 20px;
+                    display: grid;
+                    place-items: center;
+                    margin-left: 0px;
+                    transition: .3s ease-in-out;
+                    svg{
+                        width: 14px;
                         fill: #fff;
                     }
                 }

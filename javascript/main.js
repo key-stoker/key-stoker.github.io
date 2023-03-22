@@ -20,6 +20,7 @@ let input = $('.tag-input > input');
 
     ShowLockTags();
     OnClickLoked();
+    OnClickRemove();
     //Sortable function ul li list
     $('.main-tag, .compl-tag').sortable({
         cancel: '.locked',
@@ -49,20 +50,11 @@ let input = $('.tag-input > input');
             clip += element.text().trim();
             if (i < elements.length - 1 && i + 1 < maxwords) {
                 console.log(i, elements.length - 1, clip);
-                clip += ',';
+                clip += ', ';
             }
         }
         copyToClipboard(clip);
         console.log(clip);
-        // $('li').each(function (index) {
-        //     console.log(index);
-        //     if (index === maxwords) {
-        //         return false; // останавливаем перебор, если дошли до 49-го элемента
-        //     }
-        //     if (index !== 0) { // если это не первый элемент, то добавляем запятую
-        //         $(this).prepend(', ');
-        //     }
-        // });
     });
 
     //Watch the event btn add words
@@ -100,6 +92,9 @@ let input = $('.tag-input > input');
             localStorage.setItem(dialog.key, false);
         });
     }
+
+    //Обновляем количество тегов
+    UpdateCount();
 })();
 
 function SearchTags(value) {
@@ -165,8 +160,6 @@ function AddTag(tag, lock = false) {
     } else {
         $('.compl-tag').append(GenerateTag(tag, lock));
     }
-
-    curwords++;
 }
 
 /**
@@ -175,10 +168,13 @@ function AddTag(tag, lock = false) {
  * @returns will return the finished html
  */
 function GenerateTag(content, lock = false) {
-    return ` <li class="${lock ? 'locked' : ''}"><span class="icon-lock"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"/></svg></span><span class="text">${content}</span></li>`;
+    return ` <li class="${lock ? 'locked' : ''}"><span class="icon-lock"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M144 144v48H304V144c0-44.2-35.8-80-80-80s-80 35.8-80 80zM80 192V144C80 64.5 144.5 0 224 0s144 64.5 144 144v48h16c35.3 0 64 28.7 64 64V448c0 35.3-28.7 64-64 64H64c-35.3 0-64-28.7-64-64V256c0-35.3 28.7-64 64-64H80z"/></svg></span><span class="text">${content}</span><span class="icon-remove"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg></span></li>`;
 }
 
+//Update counts tags
 function UpdateCount() {
+    //Get Current count tags
+    curwords = $('li').length;
     //Set text max words in visual
     $('.info-words > .count > .max').text(maxwords);
     //Set curent words
@@ -259,6 +255,13 @@ function OnClickLoked() {
             saved_tags.data.push(element.text().trim());
             SetData(saved_tags, true);
         }
+    });
+}
+
+function OnClickRemove(){
+    $('ul').on('click', 'li > .icon-remove', (e)=>{
+        let element = $(e.currentTarget).closest('li');
+        element.remove();
     });
 }
 

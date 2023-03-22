@@ -134,8 +134,9 @@ main .block-tag ul li.ui-sortable-helper .icon-move {
   display: block;
 }
 main .block-tag ul li {
-  display: grid;
-  place-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   position: relative;
   border-radius: 3px;
   color: #fff;
@@ -169,6 +170,24 @@ main .block-tag ul li .icon-move {
 }
 main .block-tag ul li .icon-move svg {
   width: 10px;
+  fill: #fff;
+}
+main .block-tag ul li:not(.locked):not(.ui-sortable-helper):hover > .icon-remove {
+  max-width: 20px;
+  margin-left: 10px;
+}
+main .block-tag ul li .icon-remove {
+  width: 20px;
+  max-width: 0px;
+  overflow: hidden;
+  height: 20px;
+  display: grid;
+  place-items: center;
+  margin-left: 0px;
+  transition: 0.3s ease-in-out;
+}
+main .block-tag ul li .icon-remove svg {
+  width: 14px;
   fill: #fff;
 }
 main .block-tag ul li:hover .icon-lock {

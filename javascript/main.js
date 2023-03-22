@@ -50,20 +50,11 @@ let input = $('.tag-input > input');
             clip += element.text().trim();
             if (i < elements.length - 1 && i + 1 < maxwords) {
                 console.log(i, elements.length - 1, clip);
-                clip += ',';
+                clip += ', ';
             }
         }
         copyToClipboard(clip);
         console.log(clip);
-        // $('li').each(function (index) {
-        //     console.log(index);
-        //     if (index === maxwords) {
-        //         return false; // останавливаем перебор, если дошли до 49-го элемента
-        //     }
-        //     if (index !== 0) { // если это не первый элемент, то добавляем запятую
-        //         $(this).prepend(', ');
-        //     }
-        // });
     });
 
     //Watch the event btn add words

@@ -118,7 +118,7 @@ function SearchTags(value) {
 function AddTags() {
     //Get value input
     let value = input.val();
-    if (value.length > 2) {
+    if (value.length > 1) {
         //Split text on symbvols , and ;
         let elements = value.split(/[,,;]/);
 
@@ -173,6 +173,7 @@ function GenerateTag(content, lock = false) {
 
 //Update counts tags
 function UpdateCount() {
+    console.log('obnovlaem');
     //Get Current count tags
     curwords = $('li').length;
     //Set text max words in visual

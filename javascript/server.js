@@ -1,6 +1,11 @@
-navigator.serviceWorker.addEventListener('controllerchange',  ()  => {
-    console.log('Update foudned');
+/**
+ * Когда была команда обновить файлы;
+ * В нашем примере это работает как обновление программы
+ */
+navigator.serviceWorker?.addEventListener('controllerchange', () => {
+    //Указываем что было обновление
     localStorage.setItem('dialog-update', true);
+    //Чтобы изменения вступили в силу нужно перезагрузить страницу (программу)
     window.location.reload();
 });
 

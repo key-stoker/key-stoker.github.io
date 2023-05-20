@@ -145,6 +145,13 @@ main .block-tag ul li {
   font-size: 13px;
   cursor: pointer;
 }
+main .block-tag ul li .count-repetition {
+  position: absolute;
+  bottom: 2px;
+  right: 3px;
+  font-size: 10px;
+  opacity: 0.6;
+}
 main .block-tag ul li .icon-lock {
   display: none;
   position: absolute;

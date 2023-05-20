@@ -156,6 +156,14 @@ main {
                 font-size: 13px;
                 cursor: pointer;
 
+                .count-repetition{
+                    position: absolute;
+                    bottom: 2px;
+                    right: 3px;
+                    font-size: 10px;
+                    opacity: .6;
+                }
+
                 .icon-lock {
                     display: none;
                     position: absolute;

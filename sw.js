@@ -1,4 +1,4 @@
-var version = '6';
+var version = '8';
 var cacheName = 'pwa-keys-v' + version;
 var appShellFilesToCache = [
     //Pages

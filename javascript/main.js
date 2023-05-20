@@ -43,7 +43,7 @@ let input = $('.tag-input > input');
         let elements = $('li');
         let clip = "";
         for (let i = 0; i < elements.length; i++) {
-            const element = $(elements[i]);
+            const element = $(elements[i]).find('.text');
             if (i >= maxwords) {
                 continue;
             }
@@ -64,7 +64,7 @@ let input = $('.tag-input > input');
 
     //Watch event input change
     input.keyup(() => {
-        let val = input.val();
+        let val = input.val().toLowerCase();
         if (val.length > 1) {
             $('ul').addClass('search-tag');
             SearchTags(val);
@@ -82,19 +82,16 @@ let input = $('.tag-input > input');
     })
 
     //Check update
-    //Если у пользователя нет ключа оюновления то он первый раз
-    if (localStorage.getItem(dialog.key) == null) {
-        localStorage.setItem(dialog.key, true);
-    }
-    //Елси было обновление то показываем диалоговое окно
-    if (localStorage.getItem(dialog.key) == "true") {
-        dialog.show(() => {
-            localStorage.setItem(dialog.key, false);
-        });
+    //Если у пользователя нет ключа обновления то он первый раз
+    if (localStorage.getItem(UpdateWindow.key) == null) {
+        localStorage.setItem(UpdateWindow.key, true);
     }
 
     //Обновляем количество тегов
     UpdateCount();
+
+    //GetGithubReleases
+    GitHubRelease();
 })();
 
 function SearchTags(value) {
@@ -117,10 +114,10 @@ function SearchTags(value) {
 
 function AddTags() {
     //Get value input
-    let value = input.val();
+    let value = input.val().toLowerCase();
     if (value.length > 1) {
         //Split text on symbvols , and ;
-        let elements = value.split(/[,,;]/);
+        let elements = value.split(/[,,;,.,:]/);
 
         for (let i = 0; i < elements.length; i++) {
             const element = elements[i];
@@ -147,8 +144,17 @@ function AddTag(tag, lock = false) {
     }
 
     for (let i = 0; i < $('ul>li').length; i++) {
-        const e = $($('ul>li')[i]).text().trim();
+        const e = $($('ul>li')[i]).find( ".text" ).text().trim();
         if (e === tag) {
+            //Add count +1 to span text
+            //Search .count-repetition
+            if($($('ul>li')[i]).find('.count-repetition').length != 0){
+                let val = parseInt($($($('ul>li')[i]).find('.count-repetition')[0]).attr('data-count'));
+                $($($('ul>li')[i]).find('.count-repetition')[0]).attr('data-count', val+1);
+                $($($('ul>li')[i]).find('.count-repetition')[0]).text(val+1);
+            }else{
+                $($('ul>li')[i]).append('<span class="count-repetition" data-count="1">1</span>');
+            }
             return;
         }
     }
@@ -273,4 +279,32 @@ function ShowLockTags() {
         const text = saved_tags.data[i];
         AddTag(text, true);
     }
+}
+
+//Get data from github
+async function GitHubRelease() {
+    fetch("https://api.github.com/repos/key-stoker/key-stoker.github.io/releases").then(async (response) => {
+        if (response.ok) {
+            let data = await response.json();
+
+            //If the version of the git differs from the version saved, it shows a dialog box
+
+            let saved_git_verrsion = JSON.parse(localStorage.getItem('github-version'));
+            if (saved_git_verrsion == null || saved_git_verrsion.tag != data[0].tag_name) {
+                //If the user does not have an update key, then this is the first time
+                if (localStorage.getItem(UpdateWindow.key) == null) {
+                    localStorage.setItem(UpdateWindow.key, true);
+                }
+                //If there was an update, then we show a dialog box
+                if (localStorage.getItem(UpdateWindow.key) == "true") {
+                    UpdateWindow.data = data;
+                    WindowManagment.click(UpdateWindow);
+                }
+            }
+        }
+    });
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
